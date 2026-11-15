@@ -1,84 +1,162 @@
-#contactPage{
+#contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 60rem;
     min-height: calc(100vh - 4rem);
-    width: 100vw;
-    max-width: 60rem;
     margin: 0 auto;
+    padding: 4rem 1rem 2rem;
     text-align: center;
+}
+
+.availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    background: var(--surface);
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.availabilityDot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+    animation: ping 2s ease-out infinite;
+}
+
+@keyframes ping {
+    to { box-shadow: 0 0 0 0.7rem rgba(74, 222, 128, 0); }
+}
+
+.contactPageTitle {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2.2rem, 6vw, 3.25rem);
+    font-weight: 700;
+}
+
+.contactDescription {
+    margin: 0;
+    padding: 0.5rem 1rem 1.5rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+.contactForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
-
-.contactPageTitle{
-    margin: 1rem 0;
-    font-size: 3rem;
-}
-
-.contactDescription{
-    padding: 1rem;
-    font-size: medium;
-    font-weight: 300;
-}
-
-.contactForm{
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    max-width: 60rem;
-}
-
-.name, .email, .msg{
-    font-size: medium;
     width: 100%;
     max-width: 40rem;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    background: rgba(158, 136, 63, 0.829);
+    padding: 2rem;
 }
 
-.name::placeholder, .email::placeholder, .msg::placeholder{
-    color: white;
+.formField {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color var(--speed), box-shadow var(--speed), background var(--speed);
 }
 
-.submitBtn{
-    background: white;
+.formField::placeholder {
+    color: rgba(244, 246, 255, 0.55);
+}
+
+.formField:focus {
+    outline: none;
+    border-color: var(--accent-3);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.25);
+}
+
+textarea.formField {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.submitBtn {
+    margin: 1.25rem 0 0.75rem;
+    padding: 0.85rem 3rem;
     border: none;
-    border-radius: 0.5rem;
-    padding: 0.75rem 3.5rem;
-    margin: 2rem;
+    border-radius: 2rem;
+    background: var(--accent);
+    color: #1b1400;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: transform var(--speed), box-shadow var(--speed);
 }
 
-.submitBtn:hover{
-    background-color: yellow;
-    transition: 0.7s;
+.submitBtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 209, 102, 0.35);
 }
 
-.links{
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.formStatus {
+    min-height: 1.5rem;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.formStatus--success {
+    color: #86efac;
+}
+
+.formStatus--error {
+    color: #fca5a5;
+}
+
+.links {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0 1rem;
 }
 
-.link{
-    object-fit: cover;
-    height: 3.5rem;
-    width: 3rem;
-    margin: 0 0.75rem;
-    cursor: pointer;
-}
-
-.oLink{
-    object-fit: cover;
+.socialIcon {
+    display: block;
     height: 3rem;
     width: 3rem;
-    margin: 0 0.75rem;
+    object-fit: cover;
+    transition: transform var(--speed), filter var(--speed);
+}
+
+.socialIcon:hover {
+    transform: translateY(-4px) scale(1.1);
+    filter: drop-shadow(0 8px 14px rgba(124, 92, 255, 0.5));
+}
+
+.socialIcon--round {
     border-radius: 50%;
-    cursor: pointer;
+}
+
+.socialIcon--plain {
+    height: 3.5rem;
+}
+
+@media screen and (max-width: 480px) {
+    .contactForm {
+        padding: 1.25rem;
+    }
 }

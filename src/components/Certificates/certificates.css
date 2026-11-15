@@ -1,58 +1,164 @@
-#certificates{
-    margin: 0 auto;
-    min-height: calc(100vh - 4rem);
-    width: 100vw;
-    max-width: 60rem;
+#certificates {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    width: 100%;
+    max-width: 65rem;
+    min-height: calc(100vh - 4rem);
+    margin: 0 auto;
+    padding: 4rem 1rem 2rem;
     text-align: center;
-    padding: 0 1rem;
-    margin-top: 1rem;
 }
 
-.certificatesTitle{
-    margin: 1rem 0;
-    font-size: 3rem;
+.certificatesTitle {
+    margin: 0 0 1rem;
+    font-size: clamp(2.2rem, 6vw, 3.25rem);
+    font-weight: 700;
 }
 
-.certificatesdescription{
-    font-weight: 300;
-    font-size: 1rem;
+.certificatesDescription {
     max-width: 45rem;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--muted);
 }
 
-.certificatesImgs{
+/* 3 columns on desktop, 2 on tablet, 1 on phones.
+   With 6 cards the last row is always full. */
+.certificatesImgs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+/* Every card in a row stretches to the same height */
+.certificate {
     display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 0.6rem 0.6rem 1rem;
+    transition: translate var(--speed), border-color var(--speed), box-shadow var(--speed);
+}
+
+.certificate:hover {
+    translate: 0 -8px;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 18px 50px rgba(34, 211, 238, 0.22);
+}
+
+.certificateMedia {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: calc(var(--radius) - 0.4rem);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.certificateOpen {
+    cursor: zoom-in;
+}
+
+.certificateOpen:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* "contain" shows the whole certificate instead of cropping its edges */
+.certificatesImg {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    transition: scale 0.6s ease;
+}
+
+.certificate:hover .certificatesImg {
+    scale: 1.05;
+}
+
+.certificate--soon .certificatesImg {
+    object-fit: cover;
+    filter: grayscale(0.6) brightness(0.75);
+}
+
+/* Captions wrap neatly and sit centred, so short and long titles line up */
+.certificate figcaption {
+    display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    width: 100vw;
-    max-width: 65rem;
+    margin-top: 0.9rem;
+    padding: 0 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
 }
 
-.certificatesImg{
-    object-fit: cover;
-    height: 20rem;
-    width: 17rem;
-    margin: 0.5rem;
+.certificateLink {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: color var(--speed);
 }
 
-.imgDescription{
-    color: white;
-    text-decoration: underline;
+.certificateLink:hover {
+    color: var(--accent);
+}
+
+.certificateSoon {
+    color: var(--muted);
+    font-weight: 300;
+}
+
+/* ---------- Lightbox ---------- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(3, 5, 15, 0.86);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: zoom-out;
+    animation: fadeIn 0.25s ease;
+}
+
+.lightboxImg {
+    max-width: min(92vw, 52rem);
+    max-height: 85vh;
+    border-radius: 1rem;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    cursor: default;
+}
+
+.lightboxClose {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface-strong);
+    color: var(--text);
+    font-size: 1.6rem;
+    line-height: 1;
     cursor: pointer;
 }
 
-.imgDescription:hover{
-    color: yellow;
-    transition: 0.75s;
-}
-
-@media screen and (max-width: 585px) {
-    .certificatesImg{
-        height: 48vw;
-        width: 42vw;
-    }
+.lightboxClose:hover {
+    background: var(--accent);
+    color: #1b1400;
 }

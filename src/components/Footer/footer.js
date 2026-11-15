@@ -1,14 +1,22 @@
 import React from 'react';
 import './footer.css';
+import { animateScroll } from 'react-scroll';
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
+const OWNER = 'Emmanuel Balogun';
 
-  return (
-    <footer className='footer'>
-      &copy; {currentYear} Emmanuel Balogun. All rights reserved.
-    </footer>
-  );
-}
+const Footer = () => (
+  <footer className='footer'>
+    <p className='footerText'>
+      &copy; {new Date().getFullYear()} {OWNER}. All rights reserved.
+    </p>
+    <button
+      type='button'
+      className='toTop'
+      onClick={() => animateScroll.scrollToTop({ duration: 500, smooth: true })}
+    >
+      Back to top <span aria-hidden='true'>&uarr;</span>
+    </button>
+  </footer>
+);
 
 export default Footer;
