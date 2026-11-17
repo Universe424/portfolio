@@ -86,14 +86,18 @@
 
 .worksImgs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+    gap: 1.5rem;
     width: 100%;
 }
 
+/* Cards in a row stretch to the same height */
 .work {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
     margin: 0;
-    padding: 0.6rem 0.6rem 0.9rem;
+    padding: 0.6rem 0.6rem 1rem;
     transition: translate var(--speed), border-color var(--speed), box-shadow var(--speed);
 }
 
@@ -140,9 +144,19 @@
     text-transform: uppercase;
 }
 
+/* Captions wrap and sit centred so short and long titles line up */
 .work figcaption {
-    margin-top: 0.8rem;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.9rem;
+    padding: 0 0.4rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
 }
 
 .workLink {

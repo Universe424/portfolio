@@ -4,6 +4,7 @@ import firstPortfolio from '../../assets/portfolio1.png';
 import afrotada from '../../assets/afrotada.webp';
 import fusion360 from '../../assets/fusion360.png';
 import skymit from '../../assets/skymit.jpg';
+import dufil from '../../assets/dufil.jpeg';
 import placeholder1 from '../../assets/portfolio-1.png';
 import placeholder2 from '../../assets/portfolio-2.png';
 import placeholder3 from '../../assets/portfolio-3.png';
@@ -12,6 +13,9 @@ import placeholder4 from '../../assets/portfolio-4.png';
 const placeholders = (images) =>
   images.map((image) => ({ title: 'coming soon', image, comingSoon: true }));
 
+// Tip: keep each section at 3, 6, 9... cards (real + placeholders)
+// so the grid always ends on a full row. When you finish a real project,
+// swap it in for a placeholder instead of adding a new card.
 const SECTIONS = [
   {
     id: 'frontend',
@@ -38,7 +42,8 @@ const SECTIONS = [
     projects: [
       { title: 'Fusion 360', image: fusion360 },
       { title: 'Skymit Industrial training', image: skymit },
-      ...placeholders([placeholder4, placeholder3, placeholder2, placeholder1]),
+      { title: 'Dufil Prima Foods', image: dufil },
+      ...placeholders([placeholder4, placeholder3, placeholder2]),
     ],
   },
 ];
@@ -54,7 +59,7 @@ const Caption = ({ title, href, comingSoon }) => {
     );
   }
   if (comingSoon) return <em className='workSoon'>{title}</em>;
-  return title;
+  return <span>{title}</span>;
 };
 
 const Project = ({ title, image, href, comingSoon }) => (
